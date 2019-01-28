@@ -6,18 +6,20 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class TimeMap {
-    private Map<String, LinkedHashMap<Integer, String>> m;
+    private Map<String, TreeMap<Integer, String>> m;
+
     public TimeMap() {
         m = new HashMap<>();
     }
 
     public void set(String key, String value, int timestamp) {
         if (!m.containsKey(key)) {
-            m.put(key, new LinkedHashMap<>());
+            m.put(key, new TreeMap<>());
         }
-        LinkedHashMap<Integer, String> subMap = m.get(key);
+        TreeMap<Integer, String> subMap = m.get(key);
         subMap.put(timestamp, value);
     }
 
@@ -25,15 +27,13 @@ public class TimeMap {
         if (!m.containsKey(key)) {
             return "";
         }
-        LinkedHashMap<Integer, String> subMap = m.get(key);
-        List<Integer> subMapKeys = new ArrayList<>(subMap.keySet());
-        Collections.reverse(subMapKeys);
-        for (int i = 0; i < subMapKeys.size(); i++) {
-            if (subMapKeys.get(i) <= timestamp) {
-                return subMap.get(subMapKeys.get(i));
-            }
+        TreeMap<Integer, String> subMap = m.get(key);
+        Map.Entry<Integer, String> res = subMap.floorEntry(timestamp);
+        if (res != null) {
+            return res.getValue();
+        } else {
+            return "";
         }
-        return "";
     }
 
     public static void main(String[] args) {
@@ -43,6 +43,6 @@ public class TimeMap {
         System.out.println(kv.get("foo", 3));
         kv.set("foo", "bar2", 4);
         System.out.println(kv.get("foo", 4));
-        System.out.println(kv.get("foo", 5));
+        System.out.println(kv.get("foo", 0));
     }
 }
