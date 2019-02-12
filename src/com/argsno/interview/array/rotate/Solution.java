@@ -16,7 +16,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] in1 = new int[] {1, 2, 3, 4, 5, 6, 7};
+        int[] in1 = new int[]{1, 2, 3, 4, 5, 6, 7};
         solution.rotate(in1, 3);
         System.out.println(Arrays.toString(in1));
     }

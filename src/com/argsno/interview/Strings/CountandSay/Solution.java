@@ -6,7 +6,7 @@ public class Solution {
         ans[1] = "1";
         for (int i = 2; i <= n; i++) {
             StringBuilder sb = new StringBuilder();
-            String prev = ans[i-1];
+            String prev = ans[i - 1];
             int j = 1;
             int count = 1;
             while (j < prev.length()) {
@@ -14,7 +14,7 @@ public class Solution {
                     count++;
                 } else {
                     sb.append(count);
-                    sb.append(prev.charAt(j-1));
+                    sb.append(prev.charAt(j - 1));
                     count = 1;
                 }
                 j++;

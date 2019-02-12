@@ -4,6 +4,7 @@ import com.argsno.TreeNode;
 
 public class Solution {
     long max = Long.MIN_VALUE;
+
     public boolean isValidBST(TreeNode root) {
         if (root == null) {
             return true;
